@@ -22,6 +22,7 @@ public class server {
                 clientHandler clientHandler = new clientHandler(socket);
 
                 Thread thread = new Thread(clientHandler);
+                thread.start();
             }
         }catch(IOException e){
 

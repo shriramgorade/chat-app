@@ -83,6 +83,4 @@ public class client {
         client.listenForMessages();
         client.sendMessage();
     }
-
-
 }
