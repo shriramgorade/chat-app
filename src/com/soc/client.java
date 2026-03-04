@@ -30,9 +30,15 @@ public class client {
             bufferedWriter.flush();
 
             Scanner scanner = new Scanner(System.in);
-            while(socket.isConnected()){
+            while(!socket.isClosed()){
                 String messageToSend = scanner.nextLine();
-                bufferedWriter.write(username + ": " + messageToSend);
+
+                if(messageToSend.equalsIgnoreCase("/quit")){
+                    System.out.println("Program closed.");
+                    closeEverything(socket, bufferedReader, bufferedWriter);
+                    break;
+                }
+                bufferedWriter.write(messageToSend);
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
             }
@@ -49,7 +55,7 @@ public class client {
                 while(socket.isConnected()){
                     try{
                         msgFromChat = bufferedReader.readLine();
-                        System.out.println(msgFromChat);
+                        System.out.print("\r" + msgFromChat + "\n");
                     } catch (IOException e) {
                         closeEverything(socket,bufferedReader, bufferedWriter);
                     }
